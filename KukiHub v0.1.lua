@@ -9,14 +9,44 @@ local Theme2 = {
 }
 -- начало 1 части меню
 local Window = Library.CreateLib("KukiHub v0.1", "RJTheme6")-- Создать окно UI
+
 local Tab = Window:NewTab("Misc")
+
 local Section = Tab:NewSection("Functions")
+
 Section:NewSlider("Jump", "Changed Jump Power", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
 game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
 Section:NewSlider("Speed", "Changed Walk speed", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
 game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local On = Instance.new("StringValue")
+On.Parent = TextButton
+On.Value = "Off"
+mouse.Button1Up:Connect(function()
+    if On.Value == "Off" then
+
+    else
+        if mouse.Target.Locked == true then
+            mouse.Target:Destroy()
+        else
+            mouse.Target:Destroy()
+        end
+    end
+end)
+-- Бинд на клавиши
+Section:NewKeybind("btools", "Instrument delete object", Enum.KeyCode.Y, function()
+ if On.Value == "Off" then
+        On.Value = "On"
+        TextButton.Text = "Btools (On)"
+    else
+        On.Value = "Off"
+        TextButton.Text = "Btools (Off)"
+    end
 end)
 
 local rest = game:service('Players')
