@@ -52,11 +52,10 @@ end)
 
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
-Section:NewButton("Fly","Fly",function()
-    
+Section:NewSlider("JumpPower", "Jump", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
+game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
 end)
-
-Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
+Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
 game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
