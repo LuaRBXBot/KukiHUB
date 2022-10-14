@@ -9,10 +9,17 @@ local Theme2 = {
 }
 -- начало 1 части меню
 local Window = Library.CreateLib("KukiHub v0.1", "RJTheme6")-- Создать окно UI
-
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
-local Section = Tab:NewSection("Functions")
+Section:NewSlider("JumpPower", "Jump", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
+game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
+game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+local Tab = Window:NewTab("scripts")
+local Section = Tab:NewSection("Scripts hub")
 Section:NewButton("Load Project Lazarus scripts","Loading in menu Project Lazarus scripts",function()
 local Tab = Window:NewTab("Project Lazarus") -- Page1
 local Section = Tab:NewSection("Functions") -- Info
@@ -47,16 +54,6 @@ Section:NewTextBox("Enter name player","Teleport to player ", function(tex)
     local v999 = game.Workspace:FindFirstChild(tex)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v999.HumanoidRootPart.CFrame * CFrame.new(0, 1, 2)
 end)    
-end)
-
-
-local Tab = Window:NewTab("Misc")
-local Section = Tab:NewSection("Functions")
-Section:NewSlider("JumpPower", "Jump", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
-game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
-end)
-Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
-game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
 local rest = game:service('Players')
