@@ -11,11 +11,11 @@ local Theme2 = {
 local Window = Library.CreateLib("KukiHub v0.1", "RJTheme6")-- Создать окно UI
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
-Section:NewButton("Fly","Fly",function()
-    
+Section:NewSlider("Jump", "Changed Jump Power", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
+game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 
-Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
+Section:NewSlider("Speed", "Changed Walk speed", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
 game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
