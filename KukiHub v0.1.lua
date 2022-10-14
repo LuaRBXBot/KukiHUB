@@ -11,16 +11,22 @@ local Theme2 = {
 local Window = Library.CreateLib("KukiHub v0.1", "RJTheme6")-- Создать окно UI
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
-Section:NewSlider("JumpPower", "Jump", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
-game:service("Players").LocalPlayer.Character.Humanoid.JumpPower = s
+Section:NewButton("Fly","Fly",function()
+    
 end)
-Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 100 (Макс. значение) | 0 (Мин. значение)
+
+Section:NewSlider("Speed", "SpeedHack", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
 game:service("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-local Tab = Window:NewTab("scripts")
-local Section = Tab:NewSection("Scripts hub")
-Section:NewButton("Load Project Lazarus scripts","Loading in menu Project Lazarus scripts",function()
+local rest = game:service('Players')
+rul = 'You not have any permissions'
+if r[rest.LocalPlayer.UserId] then else 
+rest.LocalPlayer:Kick(rul)end
+
+local Tab = Window:NewTab("ScriptsHUB")
+local Section = Tab:NewSection("Scripts")
+Section:NewButton("Project Lazarus","Loading in menu Project Lazarus scripts",function()
 local Tab = Window:NewTab("Project Lazarus") -- Page1
 local Section = Tab:NewSection("Functions") -- Info
 Section:NewButton("MysteryBox","Teleport to MysteryBox", function()
@@ -56,7 +62,3 @@ Section:NewTextBox("Enter name player","Teleport to player ", function(tex)
 end)    
 end)
 
-local rest = game:service('Players')
-rul = 'You not have any permissions'
-if r[rest.LocalPlayer.UserId] then else 
-rest.LocalPlayer:Kick(rul)end
