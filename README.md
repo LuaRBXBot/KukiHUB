@@ -1,8 +1,10 @@
 # KukiHub-v0.1
 * I added on github my ScriptHUB for AutoUpdate
 
-* Use for use updated script :3
-* loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/KukiHub-v0.1/main/KukiHub%20v0.1.lua"))()
+### How to use?
+1. Use auto-updating script
+** loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/KukiHub-v0.1/main/KukiHub%20v0.1.lua"))()
+
 ### Visuals
 * esp
 
@@ -25,3 +27,9 @@
 * ~Turn Power (Turns on electricity throughout the map.)~
 * Zombie (Teleports zombies to the player on a key.)
 * Teleport to player (Enter player name[not display name] for teleport to player.)
+
+## A bizarre day
+* Teleport to items/Arrow/Frog/Rokaka/Banknote (Teleport to items)
+
+
+
