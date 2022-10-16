@@ -25,8 +25,8 @@ local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("Functions")
 local ColorBox = Instance.new("StringValue")
 ColorBox.Value = "255,48,48"
-Section:NewTextBox("Box color","This box color (x - number [ x,x,x ])",function(clr)
-    ColorBox.Value = clr
+Section:NewTextBox("Box color","This box color (x - number [ x,x,x ])",function(txt)
+    ColorBox.Value = txt
 end)
 Section:NewButton("ESP","Drawing entity through the walls", function()
 while wait(0.5) do
@@ -37,7 +37,7 @@ while wait(0.5) do
                     local esp = Instance.new("BoxHandleAdornment",childrik)
                     esp.Adornee = childrik
                     esp.ZIndex = 0
-                    esp.Size = Vector3.new(2, 5, 2)
+                    esp.Size = Vector3.new(4, 4, 4)
                     esp.Transparency = 0.65
                     esp.Color3 = Color3.fromRGB(ColorBox.Value)
                     esp.AlwaysOnTop = true
@@ -67,6 +67,15 @@ Section:NewToggle("AimAssist", "Activate AimAssist", function(state)
         _G.AimbotEnabled = false
     end
 end)
+
+Section:NewToggle("Visible FOV","Change FOV status visible/invibile",function(state)
+    if state then
+        _G.CircleVisible = true
+    else
+        _G.CircleVisible = false
+    end
+end)
+
 Section:NewSlider("FOV","Change FOV radius AimAssist", 180, 0,function(fov)
     _G.CircleRadius = fov
 end)
@@ -104,7 +113,7 @@ _G.CircleColor = Color3.fromRGB(255, 255, 255) -- (RGB) Color that the FOV circl
 _G.CircleTransparency = 0.7 -- Transparency of the circle.
 _G.CircleRadius = 80 -- The radius of the circle / FOV.
 _G.CircleFilled = false -- Determines whether or not the circle is filled.
-_G.CircleVisible = true -- Determines whether or not the circle is visible.
+_G.CircleVisible = false -- Determines whether or not the circle is visible.
 _G.CircleThickness = 0 -- The thickness of the circle.
 local FOVCircle = Drawing.new("Circle")
 FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
@@ -214,6 +223,7 @@ On.Parent = TextButton;
         end 
     end 
 end)
+
 Section:NewButton("Btools","Load btools",function()
     Section:NewKeybind("btools", "Instrument remove object", Enum.KeyCode.Y, function()
         if On.Value == "Off" then
