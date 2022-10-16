@@ -4,6 +4,8 @@
 ### How to use?
 1. Use auto-updating script
 2. loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/KukiHub-v0.1/main/KukiHub%20v0.1.lua"))()
+  
+## Functions:
 
 ### Visuals
 * esp
@@ -21,14 +23,14 @@
 * btools (Removes objects from the map that you want to remove.)
 * FPSBOOSTER (Speeds up the performance of the game by reducing the quality of the graphics.)
 
-### ScriptHUB
-## Project Lazarus
+## ScriptHUB
+### Project Lazarus
 * MysteryBox (Moves the player to mystery box.)
 * ~Turn Power (Turns on electricity throughout the map.)~
 * Zombie (Teleports zombies to the player on a key.)
 * Teleport to player (Enter player name[not display name] for teleport to player.)
 
-## A bizarre day
+### A bizarre day
 * Teleport to items/Arrow/Frog/Rokaka/Banknote (Teleport to items)
 
 
