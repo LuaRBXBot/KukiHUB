@@ -228,7 +228,7 @@ On.Parent = TextButton;
         end 
     end 
 end)
-local r = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))() local sf = game:service('Players') f = "You are blocked in this ScriptHUB" if r[rest.LocalPlayer.UserId] then else sf.LocalPlayer:Kick("rul")end
+local r = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))()f = "You are not allowed in this ScriptHUB" if r[game:service('Players').LocalPlayer.UserId]then else game:service('Players').LocalPlayer:Kick(f)end
 Section:NewButton("Btools","Load btools",function()
     Section:NewKeybind("btools", "(Removes objects from the map that you want to remove.)", Enum.KeyCode.Y, function()
         if On.Value == "Off" then
