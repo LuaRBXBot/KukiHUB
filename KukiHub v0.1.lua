@@ -13,6 +13,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRB
     }
 -- начало 1 части меню
 local Window = Library.CreateLib("KukiHub v0.1", colors)-- Создать окно UI
+wait(1)
 local Tab = Window:NewTab("ChangeLog")
 local Section = Tab:NewSection("Change log:")
 Section:NewLabel("15.10.2022: Added AimBot [Assist]")
@@ -25,6 +26,7 @@ Section:NewLabel("14.10.2022: Added btools [Misc]")
 Section:NewLabel("14.10.2022: Added jump hack [Misc]")
 Section:NewLabel("14.10.2022: Added Speed Hack [Misc]")
 Section:NewLabel("14.10.2022: Added Project Lazarus scripts [ScriptHUB]")
+wait(1)
 local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("Functions")
 local ColorBox = Instance.new("StringValue")
@@ -53,6 +55,7 @@ while wait(0.5) do
 end
 end)
 -- Секция
+wait(1)
 local Tab = Window:NewTab("Assist")
 local Section = Tab:NewSection("Enable AimAssist:")
 local Camera = workspace.CurrentCamera
@@ -180,7 +183,7 @@ RunService.RenderStepped:Connect(function()
         TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
     end
 end)
-
+wait(1)
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
 Section:NewSlider("Jump", "Changed Jump Power", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
@@ -240,6 +243,7 @@ Section:NewButton("Btools","Load btools",function()
         end
     end)
 end)
+wait(1)
 local Tab = Window:NewTab("ScriptsHUB")
 local Section = Tab:NewSection("Scripts")
  -- Project Lazarus
