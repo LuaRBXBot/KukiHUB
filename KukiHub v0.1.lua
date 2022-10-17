@@ -1,7 +1,10 @@
+local ver = "v0.7"
+local Players = game:GetService("Players")
+local icons = "https://www.roblox.com/asset/?id=9723979220"
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/MenuLib/main/Menu.lua", true))()
     colorss = {
     -- Цвет фона у Секций
-    SchemeColor = Color3.fromRGB(91, 94, 176),
+    SchemeColor = Color3.fromRGB(192, 18, 26),
     -- Цвет фона в правой части UI
     Background = Color3.fromRGB(15,15,15),
     -- Цвет фона в левой части UI
@@ -12,10 +15,11 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRB
     ElementColor = Color3.fromRGB(20, 20, 20)
     }
 -- начало 1 части меню
-local Window = Library.CreateLib("KukiHub v0.1", colors)-- Создать окно UI
-wait(0.5)
+local Window = Library.CreateLib("KukiHub "..ver, colorss)-- Создать окно UI
+wait(0.15)
 local Tab = Window:NewTab("ChangeLog")
 local Section = Tab:NewSection("Change log:")
+Section:NewLabel("17.10.2022: Reworked SpeedHack [Misc]")
 Section:NewLabel("15.10.2022: Added AimBot [Assist]")
 Section:NewLabel("15.10.2022: Added ESP [Visuals]")
 Section:NewLabel("15.10.2022: Added FPS Booster [Misc]")
@@ -26,7 +30,7 @@ Section:NewLabel("14.10.2022: Added btools [Misc]")
 Section:NewLabel("14.10.2022: Added jump hack [Misc]")
 Section:NewLabel("14.10.2022: Added Speed Hack [Misc]")
 Section:NewLabel("14.10.2022: Added Project Lazarus scripts [ScriptHUB]")
-wait(0.5)
+wait(0.15)
 local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("Functions")
 local ColorBox = Instance.new("StringValue")
@@ -55,18 +59,16 @@ while wait(0.5) do
 end
 end)
 -- Секция
-wait(0.5)
+wait(0.15)
 local Tab = Window:NewTab("Assist")
 local Section = Tab:NewSection("Enable AimAssist:")
 local Camera = workspace.CurrentCamera
-local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Holding = false
 local OnHold = Instance.new("StringValue")
--- CheckBox
 Section:NewToggle("AimAssist", "Activate AimAssist", function(state)
     if state then
         _G.AimbotEnabled = true
@@ -74,6 +76,8 @@ Section:NewToggle("AimAssist", "Activate AimAssist", function(state)
         _G.AimbotEnabled = false
     end
 end)
+
+_G.Sfar = false
 
 Section:NewToggle("Visible FOV","(hide/show FOV radius.)",function(state)
     if state then
@@ -92,7 +96,6 @@ _G.Sensitivity = s
 end)
 
 Section:NewLabel("Keybind:")
--- KeyBind
 Section:NewKeybind("AimAssist","(if you press the button it lock at target.)", Enum.KeyCode.Z, function()
     if _G.AimbotEnabled == true then
         if Holding == false then
@@ -103,7 +106,6 @@ Section:NewKeybind("AimAssist","(if you press the button it lock at target.)", E
     end
 end)
 Section:NewLabel("Hitbox:")
--- DropDown
 Section:NewDropdown("Hitbox", "(if you press the button it lock at target.)", {"Head", "Body"}, function(HitBoxs)
 if HitBoxs == "Head" then
 _G.AimPart = "Head"
@@ -112,16 +114,16 @@ _G.AimPart = "Torso"
 end
 end)
 _G.AimbotEnabled = true
-_G.TeamCheck = false -- If set to true then the script would only lock your aim at enemy team members.
-_G.AimPart = "Head" -- Where the aimbot script would lock at.
-_G.Sensitivity = 0 -- How many seconds it takes for the aimbot script to officially lock onto the target's aimpart.
-_G.CircleSides = 64 -- How many sides the FOV circle would have.
-_G.CircleColor = Color3.fromRGB(255, 255, 255) -- (RGB) Color that the FOV circle would appear as.
-_G.CircleTransparency = 0.7 -- Transparency of the circle.
-_G.CircleRadius = 80 -- The radius of the circle / FOV.
-_G.CircleFilled = false -- Determines whether or not the circle is filled.
-_G.CircleVisible = false -- Determines whether or not the circle is visible.
-_G.CircleThickness = 0 -- The thickness of the circle.
+_G.TeamCheck = false 
+_G.AimPart = "Head" 
+_G.Sensitivity = 0 
+_G.CircleSides = 64 
+_G.CircleColor = Color3.fromRGB(255, 255, 255) 
+_G.CircleTransparency = 0.7 
+_G.CircleRadius = 80 
+_G.CircleFilled = false 
+_G.CircleVisible = false 
+_G.CircleThickness = 0 
 local FOVCircle = Drawing.new("Circle")
 FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
 FOVCircle.Radius = _G.CircleRadius
@@ -183,15 +185,37 @@ RunService.RenderStepped:Connect(function()
         TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
     end
 end)
-wait(1)
+wait(0.15)
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
-Section:NewSlider("Jump", "Changed Jump Power", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+
+local plrs = game:GetService("Players")
+local SV = Instance.new("StringValue")
+local SVS = Instance.new("StringValue")
+SV.Value = 16 -- slider
+SVS.Value = 16 -- standart
+_G.SpeedHack = false
+_G.SpeedhackEnabled = false
+
+Section:NewToggle("Enable speedhack", "On/off speedhack", function(state)
+    if state then
+       _G.SpeedhackEnabled = true 
+        else
+        _G.SpeedhackEnabled = false
+    end
 end)
-Section:NewSlider("Speed", "Changed Walk speed", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+
+Section:NewSlider("SpeedValue", "No info", 150, 0,function(Count)
+    SV.Value = Count
 end)
+
+if _G.SpeedhackEnabled == true then
+    plrs.LocalPlayer.Character.Humanoid.WalkSpeed = SV.Value
+else
+    plrs.LocalPlayer.Character.Humanoid.WalkSpeed = SVS.Value
+end
+
+_G.Sfar = true
 Section:NewButton("FPS BOOSTER","(Speeds up the performance of the game by reducing the quality of the graphics.)",function()
 local removedecals = false
 local g = game
@@ -207,19 +231,30 @@ l.FogEnd = 9e9
 l.Brightness = 0
 settings().Rendering.QualityLevel = "Level01"
 for i, v in pairs(g:GetDescendants()) do
-if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then v.Material = "Plastic";v.Reflectance = 0
-elseif v:IsA("Decal") or v:IsA("Texture") and removedecals then v.Transparency = 1
-elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then v.Lifetime = NumberRange.new(0)
-elseif v:IsA("Explosion") then v.BlastPressure = 1;v.BlastRadius = 1
-elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then v.Enabled = false
-elseif v:IsA("MeshPart") then v.Material = "Plastic";v.Reflectance = 0;v.TextureID = 10385902758728957 end end
+if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
+    v.Material = "Plastic"
+    v.Reflectance = 0
+elseif v:IsA("Decal") or v:IsA("Texture") and removedecals then 
+    v.Transparency = 1
+elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then 
+    v.Lifetime = NumberRange.new(0)
+elseif v:IsA("Explosion") then 
+    v.BlastPressure = 1;
+    v.BlastRadius = 1
+elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then 
+    v.Enabled = false
+elseif v:IsA("MeshPart") then 
+    v.Material = "Plastic";
+    v.Reflectance = 0;
+    v.TextureID = 10385902758728957 
+end 
+end
 for i, e in pairs(l:GetChildren()) do
 if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then e.Enabled = false end end
 end)
 local player = game.Players.LocalPlayer;
 local mouse = player:GetMouse();
 local On = Instance.new("StringValue"); 
-On.Parent = TextButton;
  On.Value = "Off"; 
  mouse.Button1Up:Connect(function()
     if On.Value == "Off" then
@@ -231,19 +266,18 @@ On.Parent = TextButton;
         end 
     end 
 end)
-local r = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))()f = "You are not allowed in this ScriptHUB" if r[game:service('Players').LocalPlayer.UserId]then else game:service('Players').LocalPlayer:Kick(f)end
 Section:NewButton("Btools","Load btools",function()
     Section:NewKeybind("btools", "(Removes objects from the map that you want to remove.)", Enum.KeyCode.Y, function()
         if On.Value == "Off" then
             On.Value = "On"
-            TextButton.Text = "Btools (On)"
+            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KukiHUB v0.6", Text = "btools enabled", Icon = icons })
         else
             On.Value = "Off"
-            TextButton.Text = "Btools (Off)"
+            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "KukiHUB v0.6",Text = "btools disabled",Icon = icons})
         end
     end)
 end)
-wait(0.5)
+wait(0.15)
 local Tab = Window:NewTab("ScriptsHUB")
 local Section = Tab:NewSection("Scripts")
  -- Project Lazarus
@@ -252,8 +286,8 @@ local Section = Tab:NewSection("Scripts")
         local Section = Tab:NewSection("Functions")
         Section:NewButton("MysteryBox","Teleport to MysteryBox", function()
         for i,v in pairs(game:GetDescendants()) do
-            v974 = "Interact"
-                if v.Name == v974 then
+            _G.v974 = "Interact"
+                if v.Name == _G.v974 then
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.MysteryBox.Base.Clamp.CFrame
                 end
             end
@@ -273,6 +307,7 @@ local Section = Tab:NewSection("Scripts")
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v999.HumanoidRootPart.CFrame * CFrame.new(0, 1, 2)
     end)
 end)
+
  -- A bizzary day
     Section:NewButton("A Bizzare day","Loading in menu [A Bizzare Day] scripts",function()
         local Tab = Window:NewTab("A Bizzare Day")
@@ -290,3 +325,4 @@ end)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").ItFolder["Frog"].Handle.CFrame
             end)
         end)
+if _G.Sfar == true then while wait(3) do loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/Check%20Version%20System.lua",true))() if Current and Current.Version ~= ver then H68czx = "KukiHUB is updated pls rejoin" game:GetService("Players").LocalPlayer:Kick(H68czx) end local d_farGfd = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))()xfg5Sdf = "You are not allowed in KukiHUB";if d_farGfd[Players.LocalPlayer.UserId]then else Players.LocalPlayer:Kick(xfg5Sdf) end end end
