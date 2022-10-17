@@ -1,14 +1,18 @@
-local r = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase", true))()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/MenuLib/main/Menu.lua"))()
-local Theme2 = {
-    SchemeColor = Color3.fromRGB(150, 72, 148),
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/MenuLib/main/Menu.lua", true))()
+    colorss = {
+    -- Цвет фона у Секций
+    SchemeColor = Color3.fromRGB(91, 94, 176),
+    -- Цвет фона в правой части UI
     Background = Color3.fromRGB(15,15,15),
+    -- Цвет фона в левой части UI
     Header = Color3.fromRGB(15,15,15),
+    -- Цвет текста
     TextColor = Color3.fromRGB(255,255,255),
+    -- Цвет фона у кнопок
     ElementColor = Color3.fromRGB(20, 20, 20)
-}
+    }
 -- начало 1 части меню
-local Window = Library.CreateLib("KukiHub v0.1", "RJTheme6")-- Создать окно UI
+local Window = Library.CreateLib("KukiHub v0.1", colors)-- Создать окно UI
 local Tab = Window:NewTab("ChangeLog")
 local Section = Tab:NewSection("Change log:")
 Section:NewLabel("15.10.2022: Added AimBot [Assist]")
@@ -68,7 +72,7 @@ Section:NewToggle("AimAssist", "Activate AimAssist", function(state)
     end
 end)
 
-Section:NewToggle("Visible FOV","Change FOV status visible/invibile",function(state)
+Section:NewToggle("Visible FOV","(hide/show FOV radius.)",function(state)
     if state then
         _G.CircleVisible = true
     else
@@ -76,17 +80,17 @@ Section:NewToggle("Visible FOV","Change FOV status visible/invibile",function(st
     end
 end)
 
-Section:NewSlider("FOV","Change FOV radius AimAssist", 180, 0,function(fov)
+Section:NewSlider("FOV","(for change radius AimAssist.)", 180, 0,function(fov)
     _G.CircleRadius = fov
 end)
 Section:NewLabel("Aim speed:")
-Section:NewSlider("SpeedModify", "Changed speed AimAssist", 2, 0, function(s)
+Section:NewSlider("SpeedModify", "(Change speed AimAssist.)", 2, 0, function(s)
 _G.Sensitivity = s
 end)
 
 Section:NewLabel("Keybind:")
 -- KeyBind
-Section:NewKeybind("AimAssist","Binding key for look hitbox", Enum.KeyCode.Z, function()
+Section:NewKeybind("AimAssist","(if you press the button it lock at target.)", Enum.KeyCode.Z, function()
     if _G.AimbotEnabled == true then
         if Holding == false then
             Holding = true
@@ -97,10 +101,10 @@ Section:NewKeybind("AimAssist","Binding key for look hitbox", Enum.KeyCode.Z, fu
 end)
 Section:NewLabel("Hitbox:")
 -- DropDown
-Section:NewDropdown("Hitbox", "Hitbox", {"Head", "Torso"}, function(HitBoxs)
+Section:NewDropdown("Hitbox", "(if you press the button it lock at target.)", {"Head", "Body"}, function(HitBoxs)
 if HitBoxs == "Head" then
 _G.AimPart = "Head"
-elseif HitBoxs == "Torso" then
+elseif HitBoxs == "Body" then
 _G.AimPart = "Torso"
 end
 end)
@@ -176,6 +180,7 @@ RunService.RenderStepped:Connect(function()
         TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
     end
 end)
+
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Functions")
 Section:NewSlider("Jump", "Changed Jump Power", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
@@ -184,7 +189,7 @@ end)
 Section:NewSlider("Speed", "Changed Walk speed", 100, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
-Section:NewButton("FPS BOOSTER","Change textures for better fps",function()
+Section:NewButton("FPS BOOSTER","(Speeds up the performance of the game by reducing the quality of the graphics.)",function()
 local removedecals = false
 local g = game
 local w = g.Workspace
@@ -223,9 +228,9 @@ On.Parent = TextButton;
         end 
     end 
 end)
-
+local r = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))() local sf = game:service('Players') f = "You are blocked in this ScriptHUB" if r[rest.LocalPlayer.UserId] then else sf.LocalPlayer:Kick("rul")end
 Section:NewButton("Btools","Load btools",function()
-    Section:NewKeybind("btools", "Instrument remove object", Enum.KeyCode.Y, function()
+    Section:NewKeybind("btools", "(Removes objects from the map that you want to remove.)", Enum.KeyCode.Y, function()
         if On.Value == "Off" then
             On.Value = "On"
             TextButton.Text = "Btools (On)"
@@ -235,11 +240,6 @@ Section:NewButton("Btools","Load btools",function()
         end
     end)
 end)
-local rest = game:service('Players')
-rul = ''
-if r[rest.LocalPlayer.UserId] then else 
-rest.LocalPlayer:Kick(rul)end
-
 local Tab = Window:NewTab("ScriptsHUB")
 local Section = Tab:NewSection("Scripts")
  -- Project Lazarus
@@ -253,7 +253,7 @@ local Section = Tab:NewSection("Scripts")
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.MysteryBox.Base.Clamp.CFrame
                 end
             end
-        end)
+        end)        
     Section:NewKeybind("Zombie to me", "Teleported all zombie to player", Enum.KeyCode.X, function()
         while wait(0.01) do
         local v1001 = game.Players.LocalPlayer.Character
