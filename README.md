@@ -1,4 +1,4 @@
-# KukiHub-v0.1
+# KukiHUB v0.7
 * I added on github my ScriptHUB for AutoUpdate
 
 ### How to use?
