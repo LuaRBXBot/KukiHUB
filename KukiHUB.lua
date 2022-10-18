@@ -1,21 +1,16 @@
 local ver = "v0.7"
+local User = game:GetService("Players").LocalPlayer.Name
 local Players = game:GetService("Players")
 local icons = "https://www.roblox.com/asset/?id=9723979220"
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/MenuLib/main/Menu.lua", true))()
     colorss = {
-    -- Цвет фона у Секций
-    SchemeColor = Color3.fromRGB(192, 18, 26),
-    -- Цвет фона в правой части UI
-    Background = Color3.fromRGB(15,15,15),
-    -- Цвет фона в левой части UI
-    Header = Color3.fromRGB(15,15,15),
-    -- Цвет текста
-    TextColor = Color3.fromRGB(255,255,255),
-    -- Цвет фона у кнопок
-    ElementColor = Color3.fromRGB(20, 20, 20)
+        SchemeColor = Color3.fromRGB(197, 39, 39),
+        Background = Color3.fromRGB(13, 27, 87),
+        Header = Color3.fromRGB(64, 26, 153),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(69, 88, 175)
     }
--- начало 1 части меню
-local Window = Library.CreateLib("KukiHub "..ver, colorss)-- Создать окно UI
+local Window = Library.CreateLib("KukiHub "..ver.." User: "..User, colorss)-- Создать окно UI
 wait(0.15)
 local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("Functions")
@@ -44,7 +39,6 @@ while wait(0.5) do
     end
 end
 end)
--- Секция
 wait(0.15)
 local Tab = Window:NewTab("Assist")
 local Section = Tab:NewSection("Enable AimAssist:")
@@ -55,7 +49,7 @@ local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Holding = false
 local OnHold = Instance.new("StringValue")
-Section:NewToggle("AimAssist", "Activate AimAssist", function(state)
+Section:NewCheckbox("AimAssist", "Activate AimAssist", function(state)
     if state then
         _G.AimbotEnabled = true
     else
@@ -65,7 +59,7 @@ end)
 
 _G.Sfar = false
 
-Section:NewToggle("Visible FOV","(hide/show FOV radius.)",function(state)
+Section:NewCheckbox("Visible FOV","(hide/show FOV radius.)",function(state)
     if state then
         _G.CircleVisible = true
     else
@@ -178,12 +172,12 @@ local Section = Tab:NewSection("Functions")
 local plrs = game:GetService("Players")
 local SV = Instance.new("StringValue")
 local SVS = Instance.new("StringValue")
-SV.Value = 16 -- slider
-SVS.Value = 16 -- standart
+SV.Value = 16
+SVS.Value = 16
 _G.SpeedHack = false
 _G.SpeedhackEnabled = false
 
-Section:NewToggle("Enable speedhack", "On/off speedhack", function(state)
+Section:NewCheckbox("Enable speedhack", "On/off speedhack", function(state)
     if state then
        _G.SpeedhackEnabled = true 
         else
@@ -311,4 +305,4 @@ end)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").ItFolder["Frog"].Handle.CFrame
             end)
         end)
-if _G.Sfar == true then while wait(3) do loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/Check%20Version%20System.lua",true))() if Current and Current.Version ~= ver then H68czx = "KukiHUB is updated pls rejoin" game:GetService("Players").LocalPlayer:Kick(H68czx) end local d_farGfd = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))()xfg5Sdf = "You are not allowed in KukiHUB";if d_farGfd[Players.LocalPlayer.UserId]then else Players.LocalPlayer:Kick(xfg5Sdf) end end end
+if _G.Sfar == true then while wait(3) do loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/Check%20Version%20System.lua",true))() if Current and Current.Version ~= ver then H68czx = "KukiHUB is updating pls rejoin" game:GetService("Players").LocalPlayer:Kick(H68czx) end local d_farGfd = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/DataBase/main/DataBase.lua", true))()xfg5Sdf = User.." You are not allowed in KukiHUB "..ver;if d_farGfd[Players.LocalPlayer.UserId]then else Players.LocalPlayer:Kick(xfg5Sdf) end end end
