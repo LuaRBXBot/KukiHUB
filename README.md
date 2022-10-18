@@ -2,9 +2,11 @@
 * I added on github my ScriptHUB for AutoUpdate
 
 ### How to use?
-1. Use auto-updating script
-2. loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/KukiHUB/main/KukiHUB.lua"))()
-  
+ Use auto-updating script
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaRBXBot/KukiHUB/main/KukiHUB.lua"))()
+```
+
 ## Functions:
 
 ### Visuals
